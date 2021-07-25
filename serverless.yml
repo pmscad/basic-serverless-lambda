@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   stage: dev
-  region: eu-west-2
+  region: us-east-1
 
 
 functions:
