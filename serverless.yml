@@ -5,8 +5,23 @@ provider:
   runtime: nodejs12.x
   stage: dev
   region: us-east-1
-
-
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - 's3:ListBucket'
+          Resource: { 'Fn::Join': ['', ['arn:aws:s3:::', { 'Ref': 'ServerlessDeploymentBucket' }]] }
+        - Effect: 'Allow'
+          Action:
+            - 's3:PutObject'
+          Resource:
+            Fn::Join:
+              - ''
+              - - 'arn:aws:s3:::'
+                - 'Ref': 'ServerlessDeploymentBucket'
+                - '/*'
+      
 functions:
   hello:
     handler: src/handler.hello
